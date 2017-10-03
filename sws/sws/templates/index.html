@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1>Smart Water Sensing Project</h1>
+
+<p>
+A survey conducted in Granger by the County showed that private drinking water wells in most of the area had nitrate-nitrogen &gt; 6 ppm. The County initiated the process to make a Drinking Water Protection Plan to address the issue.
+</p> 
+<br><br>
+<p> We need your help to monitor the level of nitrate contamination in the Granger drinking water supply.</p>
+<br>
+<p>Why care about nitrate contamination? The residential drinking water supplies in Granger rely on private groundwater wells and it is known that a serious problem is nitrate contamination according to a survey by the St. Joseph County. Nitrate easily contaminates the water supplies from fertilizer applications or seepage of septic tanks. Ingestion of high concentrations of nitrates from contaminated waters results in methemoglobinemia.</p>
+<p>Questions? Comments? Concerns? Contact us at <b>smartwaternd@gmail.com</b></p>
+<img src='/images/nitrate.gif'>  
+<img src='/images/water.jpg' hspace='100' height='300' width='300'>  
+<img src='/images/granger.png'>  
+</div>
+</div>
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <h3><span class="glyphicon glyphicon-info-sign"></span> Instructions </h3>
+      <ul style="font-size:130%">
+        <li>Click register and enter all the information it asks for.</li>
+	<ul>
+	  <li> Usernames are case-sensitive. </li>
+	  <li> Don't worry, addresses will not be made available to the public.</li>
+	</ul>
+        <li>Login to the website using the login link.</li>
+        <li>Test your tap water for nitrate levels.</li>
+        <li>Click on the record link to input the results.</li>
+	  <ul>
+	  <li> Add the Nitrate Levels that you have tested your water for.</li>
+	  <li> Confirm that your address is correct.</li>
+	  <li> Select whether or not you have used fertilizer in the past week or not. </li>
+	  <li> Confirm that the rest of the questions have the correct pre-selected answers.<li>
+	  <li> Include an image of your test results if you have one. </li>
+	  <li> Hit Submit</li>
+	  </ul>
+	<li>Click on the entries link to view your previous entries.</li>
+	<li>From here you can edit and delete your entries.</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
+      <ul style="font-size:130%">
+	<li>To edit an entry: Click on the edit link next to the entry, add the correct results and hit update on the page that appears. </li>
+	<li>To delete an entry: Click on the edit link next to the entry, then hit the delete button on the page that appears. </li>
+      </ul>
+    </div>
+  </div> <!-- row -->
+</div>
+{% endblock %}

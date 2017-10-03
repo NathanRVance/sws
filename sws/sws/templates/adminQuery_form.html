@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}Insert Data{%endblock %} {% block content %}
+
+   <h2 style="padding-left: 10%"> Admin Query</h2>
+   <font size="5">
+   <form action="search/" method="post" style="padding-left: 10%">{% csrf_token %}
+     {{form.as_p}}
+<!--  <p> Names: <p>{{form.name}}
+  <p> Address: <p>{{form.address}}
+  <p> Nitrite levels greater than <p> {{form.lowRange}} <p> and less than <p> {{form.highRange}} -->
+  <input type="submit" value="Query" />
+
+   </form>
+</font>
+{% endblock %}

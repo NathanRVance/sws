@@ -1,0 +1,1 @@
+/home/apollo/AFS/Public/datasets/ParisShooting-2015-Jan/tweets.txt

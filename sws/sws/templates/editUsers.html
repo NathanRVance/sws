@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}Insert Data{%endblock %} {% block content %}
+
+   <h2>Edit User</h2>
+
+   <p> Current Record: <p>
+   <table border="1" style="width:70%">
+   <tr>
+   <th>User</th>
+   <th>Email</th>
+   <th>Address</th>
+   </tr>
+    <tr>
+{% for user in users %}
+    <td>{{ user.username }}</td>
+    <td>{{ user.email }}</td>
+{% endfor %}
+{% for profile in profiles %}
+    <td>{{ profile.address }}</td>
+{% endfor %}
+    </tr> 
+</table>
+    
+   <form action="users/" method="post">{% csrf_token %}
+{% for user in users %}
+   <input type="hidden" name="id" value={{user.id}}>
+{% endfor %}
+   <input type="submit" name='action' value="Delete" />
+   </form>
+   <br><br>
+ 
+   <form action="users/" method="post">{% csrf_token %}
+{% for user in users %}
+   <input type="hidden" name="id" value={{user.id}}>
+   <input type="text" name="name" value="{{user.username}}">
+   <input type="text" name="email" value="{{user.email}}">
+{% endfor %}
+{% for profile in profiles %}
+   <input type="text" name="address" value="{{profile.address}}">
+{% endfor %}
+   <input type="submit" name='action' value="Update" />
+   </form>
+ 
+  <form action="users/" method="post">{% csrf_token %}
+{% for user in users %}
+  <input type="hidden" name="id" value={{user.id}}>
+{% endfor %}
+  <input type="text" name="check" value="Enter username to promote user to admin.">
+  <input type="submit" name='action' value="Promote" />
+  </form>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+#content_left {
+	width: 310px;
+	margin-top: 20px;
+	/*background-color: #0000ff;*/
+	float: left;
+}
+
+#content_right {
+	width: 310px;
+	margin-top: 20px;
+	/*background-color: #00ff00;*/
+	float: right;
+}
+
+.people img {
+	width: 70px;
+	margin-top: 0px;
+	float: left;
+}
+
+.people p {
+}
+
+.people span {
+	font-weight: bold;
+}

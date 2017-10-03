@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Insert Data{%endblock %} {% block content %}
+
+        <div style="padding-left: 10%">
+	<h2>Add an Image</h2>
+        <font size=5>
+	<form action="/sws{% url "image" %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<p>{{ form.non_field_errors }}</p>
+	<p>{{ form.docfile.label_tag }} </p>
+	<p>
+	{{ form.docfile.errors }}
+	{{ form.docfile }}
+	</p>
+        <p><input type="hidden" name = "id" value={{ ID }}></p>
+	<p> {{msg}} </p>
+	<p><input type="submit" value="Upload" /></p>
+	</form>
+
+{% endblock %}

@@ -1,0 +1,1 @@
+/home/apollo/AFS/Public/datasets/Egypt-President-Selection-2012-June/tweets.txt

@@ -1,0 +1,40 @@
+body {
+	font-size: 62.5%;
+	font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+fieldset {
+	border:0;
+	margin: 6em;
+	height: 12em;
+}	
+
+label {
+	font-weight: normal; 
+	float: left; 
+	margin-right: .5em; 
+	font-size: 1.1em;
+}
+
+select {
+	margin-right: 1em; 
+	float: left;
+}
+
+.ui-slider {
+	clear: both; 
+	top: 5em;
+}
+
+#time_slider {
+	height:140px; 
+	padding-left:40px; 
+	padding-right:40px;
+}
+
+h2 {
+	background-color: #CCCCFF; 
+	padding: 5px 5px 5px 5px;
+}
+
+iframe { border:none; }

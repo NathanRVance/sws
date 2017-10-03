@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+<style>
+  #block {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    left: 10%;
+  }
+  #total {
+    height: 90%;
+    width: 90%;
+  }
+  #map {
+    position: relative;
+    top: 20px;
+    height: 400px;
+    width: 50%;
+  }
+  #floating-panel {
+    position: relative;
+    top: 10px;
+    z-index: 5;
+    width: 50%;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+  }
+  #floating-panel {
+    background-color: #fff;
+    border: 1px solid #999;
+    width: 50%;
+    padding: 5px;
+    position: relative;
+    top: 10px;
+    z-index: 5;
+  }
+</style>
+<div id="block">
+<h2>Page View Report: {{recCount}} Entries</h2>
+<h3> {{user}} </h3>
+
+<table border="1" style="width:70%">
+<tr>
+<th></th>
+<th>User</th>
+<th>Address</th>
+<th><b>Nitrate Level (ppm)</b></th>
+<th>Filtered</th>
+<th>Farm</th>
+<th>Fertilizer</th>
+<th>Tank Age (years)</th>
+<th>Tank Emptied (months)</th>
+<th>Pet</th>
+<th>Timestamp</th>
+{% if user.is_superuser %}
+<th>School</th>
+{% endif %}
+<th>Image</th>
+</tr>
+{% for waterInfo in waterInfos %}
+    <tr>
+    <th>
+    <form action="/sws/edit/" method="post">{% csrf_token %}
+    <input type="hidden" name="name" value={{waterInfo.name}}>
+    <input type="hidden" name="toxicity" value={{waterInfo.toxicity}}>
+    <input type="hidden" name="filtered" value={{waterInfo.filtered}}>
+    <input type="hidden" name="filtered" value={{waterInfo.fertilizer}}>
+    <input type="hidden" name="filtered" value={{waterInfo.farm}}>
+    <input type="hidden" name="filtered" value={{waterInfo.tankAge}}>
+    <input type="hidden" name="filtered" value={{waterInfo.tankEmpty}}>
+    <input type="hidden" name="time_added" value="{{waterInfo.time_added}}">
+    <input type="hidden" name="id" value={{waterInfo.id}}>
+    <input type="submit" name="action" value="Edit" />
+    </form>
+    </th>
+    <td>{{ waterInfo.name }}</td>
+    <td>{{  waterInfo.address }}</td>
+    <td><b>
+    {% if user.is_superuser %}
+      {% if waterInfo.toxicity < 10 %}
+        <font color="blue">{{ waterInfo.toxicity }}</font>
+      {% elif waterInfo.toxicity < 100 %}
+        <font color="orange">{{ waterInfo.toxicity }}</font>
+      {% else %}
+        <font color="red">{{ waterInfo.toxicity }}</font>
+      {% endif %}
+    {% else %}
+      {{ waterInfo.toxicity }}
+    {% endif %}
+    </b></td>
+    <td>{% if waterInfo.filtered  == 'Y' %}
+	Yes
+        {% elif waterInfo.filtered == 'N' %}
+	No
+	{% else %}
+	Unsure
+	{% endif %}
+    </td>
+    <td>{% if waterInfo.farm  == 'Y' %}
+	Yes
+        {% elif waterInfo.farm == 'N' %}
+	No
+	{% else %}
+	Unsure
+	{% endif %}
+    </td>
+    <td>{% if waterInfo.fertilizer  == 'Y' %}
+	Yes
+        {% elif waterInfo.fertilizer == 'N' %}
+	No
+	{% else %}
+	Unsure
+	{% endif %}
+    </td>
+    <td>{% if waterInfo.tankAge == 'U' %}
+	Unsure
+	{% else %}
+        {{ waterInfo.tankAge }}
+	{% endif %}
+    </td>
+    <td>{% if waterInfo.tankEmpty == 'U' %}
+	Unsure
+	{% else %}
+        {{ waterInfo.tankEmpty }}
+	{% endif %}
+    </td>
+    <td>{{ waterInfo.pet }}</td>
+    <td>{{ waterInfo.time_added }}</td>
+    {% if user.is_superuser %}
+    <td>{{ waterInfo.school }}</td>
+    {% endif %}
+    <td width="200">{% if  waterInfo.image  %}
+	<img src="{{ waterInfo.imageURL }}" height='20' width='20'>
+        <a href="{{ waterInfo.imageURL }}" target="_blank">{{waterInfo.image}}</a>
+
+	<form action="db/" method="post">{% csrf_token %}
+	<input type="hidden" name="id" value={{waterInfo.id}}>
+	<input type="hidden" name="imgURL" value={{waterInfo.imageURL}}>
+    	<input type="submit" name="action" value="Delete" /></form>
+	
+	{% else %}
+   		<p>No Image Added.</p>
+
+	{% endif %}
+</td>
+    </tr> 
+{% endfor %}
+</table>
+
+
+{% if user.is_superuser %}
+<div id="total">
+<div id="floating-panel">
+      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button onclick="changeGradient()">Change gradient</button>
+      <button onclick="changeRadius()">Change radius</button>
+      <button onclick="changeOpacity()">Change opacity</button>
+</div>
+<div id="map"></div>
+<script>
+
+var map, heatmap;
+ function initMap() {
+        var uluru = {lat: {{ locations.0 }}, lng: {{ locations.1 }}};
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: uluru
+        });
+
+	var counter = 0
+	var heatmapData = []
+	{% for location in locations %}
+		if (counter < 1) {
+			counter = 1
+			var lat = {{ location }}
+		} else if (counter < 2) {
+			counter = 2
+			var lon = {{ location }}
+		} else {
+			counter = 0
+			var mag = {{ location }}
+ 
+		var latLng = new google.maps.LatLng(lat, lon);
+		var weightedLoc = {
+			location: latLng,
+			weight: mag
+		};
+		heatmapData.push(weightedLoc);
+		}
+	{% endfor %}
+	heatmap = new google.maps.visualization.HeatmapLayer({
+		data: heatmapData,
+		dissipating: true,
+		map: map
+	});
+      }
+
+ function toggleHeatmap() {
+        heatmap.setMap(heatmap.getMap() ? null : map);
+      }
+
+      function changeGradient() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+      }
+
+      function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 20);
+      }
+
+      function changeOpacity() {
+        heatmap.set('opacity', heatmap.get('opacity') ? null : 1.5);
+      }
+
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD841F7qitRh2rnKt4mxYmbdWs4DYHyyFI&libraries=visualization&callback=initMap">
+    </script>
+</div>
+{% endif %}
+</div>
+</div>
+
+{% endblock %}

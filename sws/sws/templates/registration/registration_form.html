@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block title %}Register{%endblock %} {% block content %}
+
+   <h2 style="padding-left: 10%">Registration</h2>
+ 
+   <font size="5" color="red"> <p style="padding-left: 10%">{{msg}} <p> </font>
+   <font size="5">
+   <form action="/sws/accounts/register/" method="post" style="padding-left: 10%">{% csrf_token %}
+     {{form.as_p}}   <input type="submit" value="Register" />
+   </form>
+   </font>
+{% endblock %}

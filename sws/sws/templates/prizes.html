@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+<style>
+  #block {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    left: 10%;
+  }
+  #total {
+    height: 90%;
+    width: 90%;
+  }
+  #map {
+    position: relative;
+    top: 20px;
+    height: 400px;
+    width: 50%;
+  }
+  #floating-panel {
+    position: relative;
+    top: 10px;
+    z-index: 5;
+    width: 50%;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+  }
+  #floating-panel {
+    background-color: #fff;
+    border: 1px solid #999;
+    width: 50%;
+    padding: 5px;
+    position: relative;
+    top: 10px;
+    z-index: 5;
+  }
+</style>
+<div id="block">
+<h2>Prizes</h2>
+
+<h3>1. Early Bird Prizes</h3>
+<p>The first student to enter his/her data for each test day will get a small science related prize. 
+These will be awarded to both schools, announced and delivered on Friday.</p>
+
+<h4>Week 1</h4>
+<p>Three students from Northpoint and three students from Discovery were the science prize winner for being the first students to enter data on the website for the water tests on each testing day! 
+The prize for each of them is a cloud identification wheel.</p>
+
+<img src='/images/prize1.jpg'>  
+
+<h4>Week 2</h4>
+<p>Three students from Northpoint and three students from Discovery were the science prize winner for being the first students to enter data on the website for the water tests on each testing day! 
+The prize for each of them is a science journal to keep notes, observations and ideas.</P>
+
+<img src='/images/prize2.jpg'>  
+
+<h3>2. Science Prize Draw for participating students</h3>
+<p>A Science Prize will be drawn from all students entering data on the website for 3 times: week 1; week 3; and week 5. 
+Each time a student enters data on the website, his/her name will enter to the Prize pool.</p>
+
+<h4>Week 1</h4>
+<p>Science Prize draw had one winner at Northpoint and one winner at Discovery.
+Each got the following prize:</p>
+<p>For Discovery winner:</p>
+<img src='/images/prize3.png'>  
+
+
+<p>For NorthPoint winner:</p>
+<img src='/images/prize4.jpg'>  
+</div>
+</div>
+
+{% endblock %}

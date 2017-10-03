@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <link href="/sws{% static 'bootstrap/css/bootstrap.min.css' %}"
+          rel="stylesheet" media="screen">
+
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyD841F7qitRh2rnKt4mxYmbdWs4DYHyyFI" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div align="center" style="font-size:200%">
+      {% if user.is_authenticated %}
+      {{ user }}
+      <a href="/sws"><button type="button">Home</button></a>
+      <a href="{% url 'logout' %}"><button type="button">Logout</button></a>
+      <a href="/sws/insert"><button type="button">Enter Data</button></a>
+      <a href="/sws/db"><button type="button">Entered Records</button></a>
+      <a href="/sws/tutorial"><button type="button">Tutorial Video</button></a>
+      <a href="/sws/address"><button type="button">Change Addresses</button></a>
+      <a href="/sws/prizes"><button type="button">Prizes</button></a>
+      {% if user.is_superuser %}
+      <a href="/sws/search"><button type="button">Admin</button></a>
+      <a href="/sws/users"><button type="button">Users</button></a>
+      {% else %}
+      <!-- <a href="/sws/options"><button type="button">options</button></a> -->
+      {% endif %}
+      {% else %}
+      <a href="/sws"><button type="button">Home</button></a>
+      <a href="{% url 'login' %}"><button type="button">Login</button></a>
+      <a href="/sws/register/"><button type="button">Register</button></a>
+
+      {% endif %}
+    </div>
+    {% block content %}
+    {% endblock %}
+
+    <script src="/sws{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

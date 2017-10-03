@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+<style>
+  #block {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    left: 10%;
+  }
+  #total {
+    height: 90%;
+    width: 90%;
+  }
+  #map {
+    position: relative;
+    top: 20px;
+    height: 400px;
+    width: 50%;
+  }
+  #floating-panel {
+    position: relative;
+    top: 10px;
+    z-index: 5;
+    width: 50%;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+  }
+  #floating-panel {
+    background-color: #fff;
+    border: 1px solid #999;
+    width: 50%;
+    padding: 5px;
+    position: relative;
+    top: 10px;
+    z-index: 5;
+  }
+</style>
+<h2>Users: {{recCount}}</h2>
+
+<table border="1" style="width:70%">
+<tr>
+<th></th>
+<th>User</th>
+<th>Email</th>
+<th>Address</th>
+</tr>
+{% for profile in profs %}
+    <tr>
+    <th>
+    <form action="users/" method="post">{% csrf_token %}
+    <input type="hidden" name="id" value={{profile.user.id}}>
+    <input type="submit" name="action" value="Edit" />
+    </form>
+    </th>
+    <td>{{ profile.user.username }}</td>
+    <td>{{ profile.user.email }}</td>
+    <td>{{ profile.address }}</td>
+    </tr> 
+{% endfor %}
+</table>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+body {
+	/*background-image: url("../images/apollo_background_1.jpg");*/
+	background-image: url("../images/snow-night-sky-starry.jpg");
+	background-repeat: repeat;
+}
+
+.header {
+  margin:auto;
+	width: 800px;
+}
+
+.footer {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 55px;
+	clear: both;
+	background-color: #87859f;
+	text-align: right;
+}
+
+.footer p {
+	color: #ffffff;
+	font-family: Courier New;
+	font-size: 14px;
+	padding-top: 10px;
+	padding-right: 10px;
+	margin: 0 0 0 0;	
+}
+
+.main {
+	width: 800px;
+  margin:auto;
+	background-color: #ffffff;
+  display:table;
+}
+
+#menu {
+	background-color: #f1f1f1;
+	width: 130px;
+	height: 100%;
+  float: left;
+	padding: 10px;
+	margin: 0 0 0 0;
+	border: none;
+  display:table-cell;
+}
+
+#menu ul {
+	font-family: Courier new;
+	color: #424242;
+	list-style: none;
+	font-size: 16px;
+	margin-left: 3px;
+	padding-left: 0px;
+	margin-top: 10px;
+	padding-top: 0px;
+	text-decoration: none;
+}
+
+#menu li {
+	padding-top: 5px;
+}
+
+#menu li a:link, #menu li a:visited {
+	font-family: Courier new;
+	color: #424242;
+	font-size: 16px;
+	text-decoration: none;
+}
+
+#menu li a:hover {
+	text-decoration: underline;
+}
+
+.content {
+	color: #424242;
+	background-color: #ffffff;
+	width: 630px;
+	height:100%;
+  float: right;
+	padding: 10px;
+	margin: 0 0 0 0;
+	border: none;
+  display:table-cell;
+}
+
+.content img {
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+
+.content p, .content li {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-family: Courier new;
+	font-size: 13px;
+	/*text-align: justify;*/
+}
+
+.content hr {
+	color: #a0a0a0;
+	background-color:#e0e0e0;
+	border: 0;
+	height: 1px;
+	margin-top: 15px;
+}
+

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+   <h2 style="padding-left: 10%">Tutorial Videos</h2>
+   <font size="5">
+   <div style="padding-left: 10%;">
+   <p>Testing Your Water</p>
+   <video width="840" height="620" controls="controls" onclick="this.paused ? this/play() : this.pause();" style="margin-top: -50px;">
+   <source src="/media/testing.mov" type="video/mp4">
+   Your browser does not support videos in this format.
+   </video>
+   <br>
+   <br>
+   <br>
+   <p>Using The Website</p>
+   <video width="840" height="620" controls="controls" onclick="this.paused ? this/play() : this.pause();" style="margin-top: -80px;">
+   <source src="/media/sws.mp4" type="video/mp4">
+   Your browser does not support videos in this format.
+   </video>
+   </div>
+   </font>
+
+
+{% endblock %}

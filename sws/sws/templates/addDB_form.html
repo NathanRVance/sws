@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<style>
+	#id_address {
+		width: 750px;
+	}
+
+	#id_docfile {
+		padding-top: 1%;
+	}
+</style>
+   <h2 style="padding-left: 10%">Enter Data</h2>
+   <font size="5">
+   <font color="red">
+   <form name="insertForm" action="insert/" method="post" style="padding-left: 10%" onsubmit="return checkInp()" enctype="multipart/form-data">{% csrf_token %}
+   <p>Make sure to hit submit to enter your data!</p>
+   </font>
+     {{form.as_p}}   
+     <br>
+     <p> {{msg}} </p>
+     <input type="submit" value="Submit" />
+   </form>
+<br>
+   <div style="padding-left: 10%">
+   <h3> Instructions </h3>
+   <ul>
+   <li>Test your water for nitrate concentrations.</li>
+   <li>Enter the Nitrate Level (ppm) based on your test.</li>
+   <li>Review your address and correct it if necessary.</li>
+   <li>Select whether you have used fertilizer or not in the past week.</li>
+   <li> Review the rest of the information and correct it if necessary.</li>
+   <li>If you have an image of your test results, add that too.</li>
+   <li>Hit the Submit button.</li>
+   </ul>
+   </div>
+</font>
+<script>
+function checkInp()
+{
+	var x = document.forms["insertForm"]["water_levels"].value;
+	if (isNaN(x)){
+		alert("Nitrate level must be a number.")
+		return false;
+	}
+
+	if (x < 0){
+		alert("Nitrate level must be at least 0.")
+		return false;
+	}
+
+	var y = document.forms["insertForm"]["fertilizer"].value;
+	if (y==null || y==""){
+		alert("Please enter whether you have used fertilizer or not in the past week.")
+		return false;
+	}
+	return true;
+}
+</script>
+{% endblock %}

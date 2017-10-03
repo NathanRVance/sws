@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+<style>
+  #block {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    left: 10%;
+  }
+  #total {
+    height: 90%;
+    width: 90%;
+  }
+  #map {
+    position: relative;
+    top: 120px;
+    height: 400px;
+    width: 50%;
+  }
+  #floating-panel {
+    position: relative;
+    top: 10px;
+    z-index: 5;
+    width: 50%;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+  }
+  #floating-panel {
+    background-color: #fff;
+    border: 1px solid #999;
+    width: 50%;
+    padding: 5px;
+    position: relative;
+    top: 10px;
+    z-index: 5;
+  }
+</style>
+<div id="block">
+<h2>Data Map</h2>
+</div></div>
+
+<div id="total">
+<div id="map"></div>
+<script>
+
+ function initMap() {
+
+	var counter = 0
+	{% for location in locations %}
+	if (counter < 1){ 
+        	var uluru = {lat: {{ location.1 }}, lng: {{ location.2 }}};
+        	var map = new google.maps.Map(document.getElementById('map'), {
+          	zoom: 13,
+          	center: uluru
+        	});
+		counter = 1;
+	}
+
+		var latLng = new google.maps.LatLng({{ location.1 }}, {{ location.2 }});
+		var marker = new google.maps.Marker({
+			position: latLng,
+			map: map,
+			title: 'NO3 (ppm): ' + '{{ location.0 }}' + '\n' + 'Filtered: ' + '{{ location.3 }}' + '\n' + 'Peak Area in IC: ' + '{{ location.4 }}'
+		});
+		if ({{ location.0 }} <= 5.0){
+			marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+		} else {
+			marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+		}
+	{% endfor %}
+      }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD841F7qitRh2rnKt4mxYmbdWs4DYHyyFI&libraries=visualization&callback=initMap">
+    </script>
+</div>
+</div>
+</div>
+
+{% endblock %}
